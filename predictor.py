@@ -1,4 +1,4 @@
-from source import predict_class
+from source import predict_class, write_class
 import tkinter as tk
 from tkinter import filedialog
 from tkinter.messagebox import showinfo
@@ -50,8 +50,9 @@ class Window(tk.Tk):
             h = int(h / ratio)
             image = image.resize((w, h))
 
-            # getting the image with the predicted class
-            image = predict_class(image)
+            # getting the prediction and writing the result in the image
+            prediction = predict_class(image)
+            image = write_class(image, prediction)
 
             photo = ImageTk.PhotoImage(image)
 
