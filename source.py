@@ -28,20 +28,24 @@ def predict_class(image):
     # normalizing
     prediction = prediction.argmax(axis = -1)
 
-    return write_class(image, prediction)
+    return prediction
 
 def write_class(image, prediction):
+
+    # Converting to RGB
+    if image.mode != 'RGB':
+        image = image.convert('RGB')
 
     draw = ImageDraw.Draw(image)
 
     # some parameters
     position = (10, 10)
     text = LABELS[prediction[0]]
-    color = "red"
+    color = "#3498DB"
     font_size = 30
     font = ImageFont.load_default().font_variant(size = font_size)
 
     # drawing
-    draw.text(position, text, fill = color, font = font)
+    draw.text(position, text, fill = color, font = font, width = 2, outline = "black")
 
     return image
