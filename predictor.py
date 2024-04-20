@@ -1,4 +1,4 @@
-#from source import *
+from source import predict_class
 import tkinter as tk
 from tkinter import filedialog
 from tkinter.messagebox import showinfo
@@ -42,14 +42,16 @@ class Window(tk.Tk):
 
             # Obtaining and calculating new dimentions
             w, h = image.size
-            fixed_width = 400
+            fixed_width = 600
 
             # calculating new image dimentions
-            if w > fixed_width:
-                ratio = w / fixed_width
-                w = fixed_width
-                h = int(h / ratio)
-                image = image.resize((w, h))
+            ratio = w / fixed_width
+            w = fixed_width
+            h = int(h / ratio)
+            image = image.resize((w, h))
+
+            # getting the image with the predicted class
+            image = predict_class(image)
 
             photo = ImageTk.PhotoImage(image)
 
